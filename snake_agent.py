@@ -60,6 +60,7 @@ class SnakeAgent:
     #   conditions mentioned above.
     def helper_func(self, state):
         print("IN helper_func")
+
         # YOUR CODE HERE
         # YOUR CODE HERE
         # YOUR CODE HERE
@@ -98,6 +99,14 @@ class SnakeAgent:
     #   states as mentioned in helper_func, use the state variable to contain all that.
     def agent_action(self, state, points, dead):
         print("IN AGENT_ACTION")
+        randNum = random.randint(0,3)
+        print(randNum)
+        print(state[0])
+        print(state[1])
+        print(state[2])
+        print(state[3])
+        print(state[4])
+        
         # YOUR CODE HERE
         # YOUR CODE HERE
         # YOUR CODE HERE
@@ -105,6 +114,14 @@ class SnakeAgent:
         # YOUR CODE HERE
         # YOUR CODE HERE
         # YOUR CODE HERE
+        #0 up
+        #1 down 
+        #2 left
+        #3 right
 
+        if self._train:
+            #train loop
+            pass
+        return 0
         #UNCOMMENT THIS TO RETURN THE REQUIRED ACTION.
         #return action

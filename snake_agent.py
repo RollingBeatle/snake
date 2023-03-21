@@ -63,7 +63,7 @@ class SnakeAgent:
         snakeX, snakeY, bodyarr, fx, fy = state
 
         # possible moves each step is 40
-        moves = [1,1,1,1]
+        moves = [1,1,1,1] #up,down,left,right
         if snakeY == 40 or (snakeX, snakeY-40) in bodyarr:
             moves[0] = 0
         if snakeY == 480 or (snakeX, snakeY+40) in bodyarr:
@@ -73,7 +73,19 @@ class SnakeAgent:
         if snakeX == 480 or (snakeX+40, snakeY) in bodyarr:
             moves[3] = 0  
         
-        return moves
+        rFoodDir = [0,0,0,0]#up,down,right,left
+        if snakeY<fy:
+            rFoodDir[0] = 1
+        elif snakeY>fy:
+            rFoodDir[1] = 1
+        if snakeX<fx:
+            rFoodDir[2] = 1
+        elif snakeX>fx:
+            rFoodDir[3] = 1
+        
+        rFoodDist = [abs(fx-snakeX),abs(fx-snakeY)]
+
+        return moves, rFoodDir, rFoodDist
 
 
     # Computing the reward, need not be changed.

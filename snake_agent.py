@@ -101,16 +101,17 @@ class SnakeAgent:
         print("IN AGENT_ACTION")
         randNum = random.randint(0,3)
         print(randNum)
-        print(state[0])
-        print(state[1])
-        print(state[2])
-        print(state[3])
-        print(state[4])
-        
-        # YOUR CODE HERE
-        # YOUR CODE HERE
-        # YOUR CODE HERE
-        # YOUR CODE HERE
+        print("Snake head x "+str(state[0]))
+        print("Snake head y "+str(state[1]))
+        print("Snake body arr "+str(state[2]))
+        print("Snake food x "+str(state[3]))
+        print("Snake food y "+str(state[4]))
+
+
+        # YOUR CODE HERE y wall 0 on top
+        # YOUR CODE HERE y wall 520 on bottom 
+        # YOUR CODE HERE x wall 0 onleft 
+        # YOUR CODE HERE x wall 
         # YOUR CODE HERE
         # YOUR CODE HERE
         # YOUR CODE HERE
@@ -122,6 +123,6 @@ class SnakeAgent:
         if self._train:
             #train loop
             pass
-        return 0
+        return 3
         #UNCOMMENT THIS TO RETURN THE REQUIRED ACTION.
         #return action

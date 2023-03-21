@@ -60,12 +60,20 @@ class SnakeAgent:
     #   conditions mentioned above.
     def helper_func(self, state):
         print("IN helper_func")
+        snakeX, snakeY, bodyarr, fx, fy = state
 
-        # YOUR CODE HERE
-        # YOUR CODE HERE
-        # YOUR CODE HERE
-        # YOUR CODE HERE
-        # YOUR CODE HERE
+        # possible moves each step is 40
+        moves = [1,1,1,1]
+        if snakeY == 40 or (snakeX, snakeY-40) in bodyarr:
+            moves[0] = 0
+        if snakeY == 480 or (snakeX, snakeY+40) in bodyarr:
+            moves[1] = 0
+        if snakeX == 40 or (snakeX-40, snakeY) in bodyarr:
+            moves[2] = 0
+        if snakeX == 480 or (snakeX+40, snakeY) in bodyarr:
+            moves[3] = 0  
+        
+        return moves
 
 
     # Computing the reward, need not be changed.
@@ -110,8 +118,8 @@ class SnakeAgent:
 
         # YOUR CODE HERE y wall 0 on top
         # YOUR CODE HERE y wall 520 on bottom 
-        # YOUR CODE HERE x wall 0 onleft 
-        # YOUR CODE HERE x wall 
+        # YOUR CODE HERE x wall 0 on left 
+        # YOUR CODE HERE x wall 520 on right
         # YOUR CODE HERE
         # YOUR CODE HERE
         # YOUR CODE HERE

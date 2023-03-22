@@ -110,7 +110,7 @@ def make_args():
     parser.add_argument('--STAT', dest="NUM_TO_STAT", type=int, default=NUM_TO_STAT,
                         help='Number of runs to take average statistics over; set by default as NUM_TO_STAT=100')
     #   Exploration parameter
-    parser.add_argument('--Ne', dest="Ne", type=int, default=40,
+    parser.add_argument('--Ne', dest="Ne", type=int, default=0.4,
                         help='Parameter to help with next state exploration; set by default as Ne=40')
     #   Parameter to calculate learning ragte
     parser.add_argument('--LPC', dest="LPC", type=int, default=40,

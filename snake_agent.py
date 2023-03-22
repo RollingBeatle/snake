@@ -58,34 +58,68 @@ class SnakeAgent:
     #   moves it can make lead it into the snake body and so on. 
     #   This can return a list of variables that help you keep track of
     #   conditions mentioned above.
-    def helper_func(self, state):
+    def helper_func(self, state, action):
         print("IN helper_func")
         snakeX, snakeY, bodyarr, fx, fy = state
-
+#         NUM_ADJOINING_WALL_X_STATES=3  0 left, 1 right, 2 none
+# NUM_ADJOINING_WALL_Y_STATES=3          0 up, 1 down, 2 none  
+# NUM_FOOD_DIR_X=3 0 left, 1 right, 2 none
+# NUM_FOOD_DIR_Y=3  0 up, 1 down, 2 none  
+# NUM_ADJOINING_BODY_TOP_STATES=2
+# NUM_ADJOINING_BODY_BOTTOM_STATES=2
+# NUM_ADJOINING_BODY_LEFT_STATES=2
+# NUM_ADJOINING_BODY_RIGHT_STATES=2
+# NUM_ACTIONS = 4 0up 1down 2left 3right
         # possible moves each step is 40
-        moves = [1,1,1,1] #up,down,left,right
-        if snakeY == 40 or (snakeX, snakeY-40) in bodyarr:
-            moves[0] = 0
-        if snakeY == 480 or (snakeX, snakeY+40) in bodyarr:
-            moves[1] = 0
-        if snakeX == 40 or (snakeX-40, snakeY) in bodyarr:
-            moves[2] = 0
-        if snakeX == 480 or (snakeX+40, snakeY) in bodyarr:
-            moves[3] = 0  
+        qMoves = [2,2,2,2,0,0,0,0,0] 
+        if snakeX == 40:
+            qMoves[0] = 0
+        if snakeX == 480:
+            qMoves[0] = 1
+        if snakeY == 40:
+            qMoves[1] = 0
+        if snakeY == 480:
+            qMoves[1] = 1
+        if snakeX>fx:
+            qMoves[2] = 0
+        elif snakeX<fx:
+            qMoves[2] = 1
+        if snakeY>fy:
+            qMoves[3] = 0
+        elif snakeY<fy:
+            qMoves[3] = 1
+    
+        if (snakeX, snakeY-40) in bodyarr: #top
+            qMoves[4] = 1
+        if (snakeX, snakeY+40) in bodyarr: #bottom
+            qMoves[5] = 1        
+        if (snakeX-40, snakeY) in bodyarr: #left
+            qMoves[6] = 1                
+        if (snakeX+40, snakeY) in bodyarr: #right
+            qMoves[7] = 1 
+        qMoves[8] = action  
+        # if snakeX == 480 or (snakeX+40, snakeY) in bodyarr:
+        #     moves[3] = 0  
         
-        rFoodDir = [0,0,0,0]#up,down,right,left
-        if snakeY<fy:
-            rFoodDir[0] = 1
-        elif snakeY>fy:
-            rFoodDir[1] = 1
-        if snakeX<fx:
-            rFoodDir[2] = 1
-        elif snakeX>fx:
-            rFoodDir[3] = 1
+        # if snakeY == 40 or (snakeX, snakeY-40) in bodyarr:
+        #     moves[0] = 0
+        # if snakeY == 480 or (snakeX, snakeY+40) in bodyarr:
+        #     moves[1] = 0
         
-        rFoodDist = [abs(fx-snakeX),abs(fx-snakeY)]
+        
+        # rFoodDir = [0,0,0,0]#up,down,right,left
+        # if snakeY<fy:
+        #     rFoodDir[0] = 1
+        # elif snakeY>fy:
+        #     rFoodDir[1] = 1
+        # if snakeX<fx:
+        #     rFoodDir[2] = 1
+        # elif snakeX>fx:
+        #     rFoodDir[3] = 1
+        
+        # rFoodDist = [abs(fx-snakeX),abs(fx-snakeY)]
 
-        return moves, rFoodDir, rFoodDist
+        return qMoves
 
 
     # Computing the reward, need not be changed.
@@ -118,6 +152,7 @@ class SnakeAgent:
     #   The parameters defined should be enough. If you want to describe more elaborate
     #   states as mentioned in helper_func, use the state variable to contain all that.
     def agent_action(self, state, points, dead):
+
         print("IN AGENT_ACTION")
         randNum = random.randint(0,3)
         print(randNum)
@@ -126,6 +161,10 @@ class SnakeAgent:
         print("Snake body arr "+str(state[2]))
         print("Snake food x "+str(state[3]))
         print("Snake food y "+str(state[4]))
+        
+        qmoves = self.helper_func(state)
+
+                
 
 
         # YOUR CODE HERE y wall 0 on top
@@ -133,6 +172,7 @@ class SnakeAgent:
         # YOUR CODE HERE x wall 0 on left 
         # YOUR CODE HERE x wall 520 on right
         # YOUR CODE HERE
+
         # YOUR CODE HERE
         # YOUR CODE HERE
         #0 up

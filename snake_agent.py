@@ -122,8 +122,8 @@ class SnakeAgent:
         isdead = False
         if snakeX == 520 or snakeX == 0 or snakeY == 0 or snakeY== 520 or (snakeX, snakeY) in bodyarr:
             isdead= True
-
-        return qMoves, isdead
+        points = self.compute_reward(self.points, isdead)
+        return qMoves, isdead, points
 
 
     # Computing the reward, need not be changed.
@@ -157,7 +157,10 @@ class SnakeAgent:
     #   states as mentioned in helper_func, use the state variable to contain all that.
 
     def update_Qtable(self, qpoint, reward):
-        self.Q
+
+        self.Q[]
+    
+    #def randMove(self)
     def agent_action(self, state, points, dead):
 
         print("IN AGENT_ACTION")
@@ -190,25 +193,31 @@ class SnakeAgent:
         
         if self._train:
             if self.action is not None:
+                qmoves, isdead= self.helper_func(state)
+                
+                reward = self.compute_reward(state)
+                self.update_Q(self.state, self.action, state, reward)
                 currentPoints = 0
                 killed = False
+                selectedAction = None
                 rewards = []
                 for action in self.actions:
                     print()
                     tempState = state
                     if action == 0:
                         tempState [1] -= 40
+                        
                     elif action == 1:
                         tempState [1] += 40
                     elif action == 2:
                         tempState [0] -= 40
                     elif action == 3:
                         tempState [0] += 40     
-                    qmoves, isdead= self.helper_func(state)
+                    qmoves, isdead, reward = self.helper_func(state, action)
                     
-                    reward = self.compute_reward(currentPoints, currentPoints, killed)
                     rewards.append(reward)
                 optimal = max(rewards)
+                selectedAction = rewards.index(optimal)
                 print(optimal)
 
 

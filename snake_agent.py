@@ -155,6 +155,9 @@ class SnakeAgent:
     #   ie. (0 or 1 or 2 or 3) respectively. 
     #   The parameters defined should be enough. If you want to describe more elaborate
     #   states as mentioned in helper_func, use the state variable to contain all that.
+
+    def update_Qtable(self, qpoint, reward):
+        self.Q
     def agent_action(self, state, points, dead):
 
         print("IN AGENT_ACTION")

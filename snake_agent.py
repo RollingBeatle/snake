@@ -26,6 +26,7 @@ class SnakeAgent:
         # Create the Q and N Table to work with
         self.Q = helper.initialize_q_as_zeros()
         self.N = helper.initialize_q_as_zeros()
+        self.action = None
 
 
     #   This function sets if the program is in training mode or testing mode.
@@ -118,8 +119,11 @@ class SnakeAgent:
         #     rFoodDir[3] = 1
         
         # rFoodDist = [abs(fx-snakeX),abs(fx-snakeY)]
+        isdead = False
+        if snakeX == 520 or snakeX == 0 or snakeY == 0 or snakeY== 520 or (snakeX, snakeY) in bodyarr:
+            isdead= True
 
-        return qMoves
+        return qMoves, isdead
 
 
     # Computing the reward, need not be changed.
@@ -161,8 +165,8 @@ class SnakeAgent:
         print("Snake body arr "+str(state[2]))
         print("Snake food x "+str(state[3]))
         print("Snake food y "+str(state[4]))
+        print(self.Q.shape)
         
-        qmoves = self.helper_func(state)
 
                 
 
@@ -179,8 +183,32 @@ class SnakeAgent:
         #1 down 
         #2 left
         #3 right
-
+        currentPoint = 0
+        
         if self._train:
+            if self.action is not None:
+                currentPoints = 0
+                killed = False
+                rewards = []
+                for action in self.actions:
+                    print()
+                    tempState = state
+                    if action == 0:
+                        tempState [1] -= 40
+                    elif action == 1:
+                        tempState [1] += 40
+                    elif action == 2:
+                        tempState [0] -= 40
+                    elif action == 3:
+                        tempState [0] += 40     
+                    qmoves, isdead= self.helper_func(state)
+                    
+                    reward = self.compute_reward(currentPoints, currentPoints, killed)
+                    rewards.append(reward)
+                optimal = max(rewards)
+                print(optimal)
+
+
             #train loop
             pass
         return 3
